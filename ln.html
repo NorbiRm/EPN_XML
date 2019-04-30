@@ -1,0 +1,16 @@
+<rule group=”Failed login attempts from the same source” id=”1” name=”Authentication Rule 1”>
+    <test group=”subcheckset” id=”1” operator=”AND”>
+        <properties>
+            <property id=”1” name=”subchecks” qualifier=”ANY” value=”subcheck-ValidationFailed” />
+        </properties>
+    </test>
+    <test group=”userid and IP address” id=”2” operator=”AND”>
+        <properties>
+            <property id=”3” name=”username” value=”DIFFERENT” />
+            <property count=”&gt;5” id=”1” name=”srcip” value=”SAME” />
+            <property id=”2” name=”time” unit=”minutes” value=”2” />
+        </properties>
+    </test>
+</rule>
+
+if any of subcheck-ValidationFailed Authentication SSH login Failed and if within 2 minutes greater than5 events occur having different username and having same source ip XML for Failed Login Attempts from theSame Source:
