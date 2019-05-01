@@ -1,21 +1,51 @@
 grammar grammarEPN;
-input
-    :conition+;
-
+expr: statement+
+    ;
+statement:
+    | if_statement 'and' if_statement
+    | if_statement
+    ;
+if_statement:
+    | 'if' condition
+    ;
 condition:
-    |'if' '(' expr operand expr ')' 'then'
-    | 'if' expr 'then'
+    | 'any of' any
+    | 'having' having
+    | 'within' within
     ;
-expr:
-    | 'IP security' 'DDOs Attacks'
+any:
+    | LETRA+
     ;
-operand:
-    | 'AND' 'OR' 'NOT'
-    | ' ' //quise poner epsilon
+
+having:
+    | different
+    | same
     ;
+different:
+    | 'different' LETRA+
+    ;
+same:
+    | 'same' LETRA+
+    ;
+
+within:
+    | time operador
+    | time
+    ;
+operador:
+    | 'greater than'
+    ;
+time:
+    | DIGIT tipo
+    ;
+tipo:
+    |'minutes'
+    | 'hours'
+    ;
+
 DIGIT: [0-9];
-WS
-    : (' '
+LETRA: [A-Za-z];
+WS: (' '
     | '\t'
     | '\n'
-    | '\r')+ ->skip
+    | '\r')+ ->skip;
