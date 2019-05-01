@@ -67,6 +67,16 @@ public interface grammarEPNListener extends ParseTreeListener {
 	 */
 	void exitHaving(grammarEPNParser.HavingContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link grammarEPNParser#campo}.
+	 * @param ctx the parse tree
+	 */
+	void enterCampo(grammarEPNParser.CampoContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link grammarEPNParser#campo}.
+	 * @param ctx the parse tree
+	 */
+	void exitCampo(grammarEPNParser.CampoContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link grammarEPNParser#within}.
 	 * @param ctx the parse tree
 	 */

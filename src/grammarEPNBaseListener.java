@@ -87,6 +87,18 @@ public class grammarEPNBaseListener implements grammarEPNListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterCampo(grammarEPNParser.CampoContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCampo(grammarEPNParser.CampoContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterWithin(grammarEPNParser.WithinContext ctx) { }
 	/**
 	 * {@inheritDoc}

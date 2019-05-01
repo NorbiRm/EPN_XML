@@ -8,43 +8,42 @@ statement:
     ;
 if_statement:
     | 'if' condition
-    | 'if' condition 'and' condition
-    | 'if' condition 'or' condition
-    | 'if' condition 'and' if_statement
-    | 'if' condition 'or' if_statement
+    | 'if' condition ( 'and' | 'or') condition
+    | 'if' condition ( 'and' | 'or') if_statement
     ;
 condition:
-    | 'any of' any
+    | ('any of' | 'any') any
     | 'having' having
     | 'within' within
+    | 'and' condition
     ;
 any:
+    | (LETRA)+
+    ;
+having:
+    ('different' | 'same' | 'equals') value
+    ;
+campo:
     | LETRA+
     ;
-
-having:
-    | 'different' LETRA+
-    | 'same' LETRA+
-    ;
-
 within:
-    | time operador value condition
-    | time value condition
-    | time condition
-
+    | time operador value
+    | time value
+    | time
     ;
 operador:
-    | 'greater than'
+    | 'greater than' | 'greater' | 'less than'
+    | 'for' | 'than' | 'as' | 'earlier than' |
     ;
 value:
     | DIGIT LETRA+
+    | LETRA+
     ;
 time:
     | DIGIT tipo
     ;
 tipo:
-    |'minutes'
-    | 'hours'
+    |('minutes' | 'hours')
     ;
 
 DIGIT: [0-9];

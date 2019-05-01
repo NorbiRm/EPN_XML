@@ -15,17 +15,11 @@ public class EPNListener implements grammarEPNListener{
     int propertyId = 1;
     int ifId = 1;
 
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
+    String property = "";
+
+
     @Override public void enterExpr(grammarEPNParser.ExprContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
+
     @Override public void exitExpr(grammarEPNParser.ExprContext ctx) {
         for (String x:stack
         ) {
@@ -33,131 +27,89 @@ public class EPNListener implements grammarEPNListener{
         }
 
     }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
+
     @Override public void enterStatement(grammarEPNParser.StatementContext ctx) {
         ifId=1;
     }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
+
     @Override public void exitStatement(grammarEPNParser.StatementContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
+
     @Override public void enterIf_statement(grammarEPNParser.If_statementContext ctx) {
         propertyId = 1;
 
         String test = "";
 
-        test += "<test id="+ ifId +" operator=\"";
+        test += "<test ";
 
+        test +=" group=\"";
+        test += ctx.getChild(1).getChild(1)!=null ? ctx.getChild(1).getChild(1).getText() : "name";
+
+        test +="\"  id="+ ifId +" operator=\"";
         test += ctx.getChild(2)!=null ? ctx.getChild(2).getText() : "AND";
 
        test+="\" >";
 
-       test+="\n <properties>";
+       test+="\n<properties>";
 
         stack.push(test);
     }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
     @Override public void exitIf_statement(grammarEPNParser.If_statementContext ctx) {
         stack.push("</properties> ");
         stack.push("</test>");
         ifId++;
 
     }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
     @Override public void enterCondition(grammarEPNParser.ConditionContext ctx) {
-        String property = "";
+        property = "";
 
-        property+="<property id="+propertyId +" name=\"";
+        //property+="<property id="+propertyId +" name=\"";
+        property+="<property id="+propertyId;
+        propertyId++;
 
-        property += ctx.getChild(1)!=null ? ctx.getChild(1).getText() : "condition";
+        //property += ctx.getChild(1)!=null ?    ctx.getChild(1).getText() : "condition";
+
+        //property += ctx.getChild(1)!=null ? ctx.getChild(0).getText().equals("within") ? "time" : ctx.getChild(1).getText() : "condition";
 
 
-        property+="\">";
 
+
+
+
+    }
+    
+    @Override public void exitCondition(grammarEPNParser.ConditionContext ctx) {
+
+        property+="/>";
 
         stack.push(property);
-
     }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void exitCondition(grammarEPNParser.ConditionContext ctx) {
-        propertyId++;
-    }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
+    
     @Override public void enterAny(grammarEPNParser.AnyContext ctx) {
-
-
+        property+=" name=\"";
+        property += ctx.getChild(0) + "\"";
     }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
+    
     @Override public void exitAny(grammarEPNParser.AnyContext ctx) {
-        stack.push("</property> ");
-    }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void enterHaving(grammarEPNParser.HavingContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void exitHaving(grammarEPNParser.HavingContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
 
-    @Override public void enterWithin(grammarEPNParser.WithinContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
+    }
+    
+    @Override public void enterHaving(grammarEPNParser.HavingContext ctx) { }
+
+    @Override public void exitHaving(grammarEPNParser.HavingContext ctx) { }
+
+    @Override public void enterCampo(grammarEPNParser.CampoContext ctx){}
+
+    @Override public void exitCampo(grammarEPNParser.CampoContext ctx){}
+
+
+    @Override public void enterWithin(grammarEPNParser.WithinContext ctx) {
+
+    }
+
     @Override public void exitWithin(grammarEPNParser.WithinContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
+
     @Override public void enterOperador(grammarEPNParser.OperadorContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
+
     @Override public void exitOperador(grammarEPNParser.OperadorContext ctx) { }
 
     @Override
@@ -170,53 +122,26 @@ public class EPNListener implements grammarEPNListener{
 
     }
 
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void enterTime(grammarEPNParser.TimeContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
+    @Override public void enterTime(grammarEPNParser.TimeContext ctx) {
+        property+=" name=\"time\"";
+        property+=" value=\"";
+        property += ctx.getChild(0) + "\"";
+    }
+
     @Override public void exitTime(grammarEPNParser.TimeContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void enterTipo(grammarEPNParser.TipoContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
+
+    @Override public void enterTipo(grammarEPNParser.TipoContext ctx) {
+        property+=" unit=\"";
+        property += ctx.getChild(0) + "\"";
+    }
+
     @Override public void exitTipo(grammarEPNParser.TipoContext ctx) { }
 
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
     @Override public void enterEveryRule(ParserRuleContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
+
     @Override public void exitEveryRule(ParserRuleContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
+
     @Override public void visitTerminal(TerminalNode node) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
+
     @Override public void visitErrorNode(ErrorNode node) { }
 }

@@ -15,9 +15,10 @@ condition:
     | ('any of' | 'any') any
     | 'having' having
     | 'within' within
+    | 'and' condition
     ;
 any:
-    | (LETRA+' ')+
+    | (LETRA)+
     ;
 having:
     ('different' | 'same' | 'equals') value
@@ -26,9 +27,8 @@ campo:
     | LETRA+
     ;
 within:
-    | time operador value condition
-    | time value condition
-    | time condition
+    | time operador value
+    | time value
     | time
     ;
 operador:
