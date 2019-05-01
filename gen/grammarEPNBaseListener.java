@@ -1,12 +1,8 @@
-// Generated from D:/Documents/ITESM/8vo/compiladores/EPN_XML/src\grammarEPN.g4 by ANTLR 4.7.2
+// Generated from C:/Users/edfmg/Documents/GitHub/EPN_XML/src\grammarEPN.g4 by ANTLR 4.7.2
 
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Stack;
 
 /**
  * This class provides an empty implementation of {@link grammarEPNListener},
@@ -14,8 +10,6 @@ import java.util.Stack;
  * of the available methods.
  */
 public class grammarEPNBaseListener implements grammarEPNListener {
-	Map<String,Float> variables =  new HashMap<>();
-	Stack<String> stack = new Stack<>();
 	/**
 	 * {@inheritDoc}
 	 *
@@ -27,13 +21,7 @@ public class grammarEPNBaseListener implements grammarEPNListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitExpr(grammarEPNParser.ExprContext ctx) {
-		for (String x:stack
-		) {
-			System.out.println(x);
-		}
-
-	}
+	@Override public void exitExpr(grammarEPNParser.ExprContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -51,52 +39,37 @@ public class grammarEPNBaseListener implements grammarEPNListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterIf_statement(grammarEPNParser.If_statementContext ctx) {
-		stack.push("<test> ");
-		stack.push("<properties> ");
-	}
+	@Override public void enterIf_statement(grammarEPNParser.If_statementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitIf_statement(grammarEPNParser.If_statementContext ctx) {
-		stack.push("</properties> ");
-		stack.push("</test>");
-
-	}
+	@Override public void exitIf_statement(grammarEPNParser.If_statementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterCondition(grammarEPNParser.ConditionContext ctx) {
-
-	}
+	@Override public void enterCondition(grammarEPNParser.ConditionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitCondition(grammarEPNParser.ConditionContext ctx) {
-
-	}
+	@Override public void exitCondition(grammarEPNParser.ConditionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterAny(grammarEPNParser.AnyContext ctx) {
-		stack.push("<property> ");
-	}
+	@Override public void enterAny(grammarEPNParser.AnyContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitAny(grammarEPNParser.AnyContext ctx) {
-		stack.push("</property> ");
-	}
+	@Override public void exitAny(grammarEPNParser.AnyContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

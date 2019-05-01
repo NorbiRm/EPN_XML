@@ -8,6 +8,9 @@ statement:
     ;
 if_statement:
     | 'if' condition
+    | 'if' condition 'and' condition
+    | 'if' condition 'or' condition
+    | 'if' condition 'and' if_statement
     ;
 condition:
     | 'any of' any

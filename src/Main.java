@@ -9,7 +9,7 @@ public class Main {
             CommonTokenStream tokens = new CommonTokenStream(lexer);
             grammarEPNParser parser = new grammarEPNParser(tokens);
             ParseTree tree = parser.expr();
-            grammarEPNBaseListener listener = new grammarEPNBaseListener();
+            EPNListener listener = new EPNListener();
             ParseTreeWalker walker = new ParseTreeWalker();
             walker.walk(listener,tree);
             System.out.println(tree.toStringTree(parser));
