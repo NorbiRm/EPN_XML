@@ -4,12 +4,16 @@ import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * This class provides an empty implementation of {@link grammarEPNListener},
  * which can be extended to create a listener which only needs to handle a subset
  * of the available methods.
  */
 public class grammarEPNBaseListener implements grammarEPNListener {
+	Map<String,Float> variables =  new HashMap<>();
 	/**
 	 * {@inheritDoc}
 	 *
@@ -21,7 +25,9 @@ public class grammarEPNBaseListener implements grammarEPNListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitExpr(grammarEPNParser.ExprContext ctx) { }
+	@Override public void exitExpr(grammarEPNParser.ExprContext ctx) {
+		System.out.println("Sale expr");
+	}
 	/**
 	 * {@inheritDoc}
 	 *
@@ -39,13 +45,17 @@ public class grammarEPNBaseListener implements grammarEPNListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterIf_statement(grammarEPNParser.If_statementContext ctx) { }
+	@Override public void enterIf_statement(grammarEPNParser.If_statementContext ctx) {
+		System.out.println("Entra If statement");
+	}
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitIf_statement(grammarEPNParser.If_statementContext ctx) { }
+	@Override public void exitIf_statement(grammarEPNParser.If_statementContext ctx) {
+		System.out.println("<test value='" + ctx.getText()+"'>");
+	}
 	/**
 	 * {@inheritDoc}
 	 *
