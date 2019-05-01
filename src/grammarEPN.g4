@@ -1,8 +1,9 @@
 grammar grammarEPN;
-expr: statement+
+expr:
+    | statement
     ;
 statement:
-    | if_statement 'and' if_statement
+    | if_statement 'and' statement
     | if_statement
     ;
 if_statement:
