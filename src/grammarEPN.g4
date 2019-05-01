@@ -3,7 +3,7 @@ expr:
     | statement
     ;
 statement:
-    | if_statement 'and' statement
+    | if_statement 'and' if_statement
     | if_statement
     ;
 if_statement:
@@ -11,6 +11,7 @@ if_statement:
     | 'if' condition 'and' condition
     | 'if' condition 'or' condition
     | 'if' condition 'and' if_statement
+    | 'if' condition 'or' if_statement
     ;
 condition:
     | 'any of' any
@@ -48,7 +49,7 @@ tipo:
     ;
 
 DIGIT: [0-9];
-LETRA: [A-Za-z];
+LETRA: ('-'|[A-Za-z])+;
 WS: (' '
     | '\t'
     | '\n'

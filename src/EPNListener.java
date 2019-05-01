@@ -9,8 +9,12 @@ import java.util.Stack;
 
 public class EPNListener implements grammarEPNListener{
 
-    Map<String,Float> variables =  new HashMap<>();
+    Map<Integer,String> variables =  new HashMap<>();
     Stack<String> stack = new Stack<>();
+
+    int propertyId = 1;
+    int ifId = 1;
+
     /**
      * {@inheritDoc}
      *
@@ -34,7 +38,9 @@ public class EPNListener implements grammarEPNListener{
      *
      * <p>The default implementation does nothing.</p>
      */
-    @Override public void enterStatement(grammarEPNParser.StatementContext ctx) { }
+    @Override public void enterStatement(grammarEPNParser.StatementContext ctx) {
+        ifId=1;
+    }
     /**
      * {@inheritDoc}
      *
@@ -47,8 +53,19 @@ public class EPNListener implements grammarEPNListener{
      * <p>The default implementation does nothing.</p>
      */
     @Override public void enterIf_statement(grammarEPNParser.If_statementContext ctx) {
-        stack.push("<test> ");
-        stack.push("<properties> ");
+        propertyId = 1;
+
+        String test = "";
+
+        test += "<test id="+ ifId +" operator=\"";
+
+        test += ctx.getChild(2)!=null ? ctx.getChild(2).getText() : "AND";
+
+       test+="\" >";
+
+       test+="\n <properties>";
+
+        stack.push(test);
     }
     /**
      * {@inheritDoc}
@@ -58,6 +75,7 @@ public class EPNListener implements grammarEPNListener{
     @Override public void exitIf_statement(grammarEPNParser.If_statementContext ctx) {
         stack.push("</properties> ");
         stack.push("</test>");
+        ifId++;
 
     }
     /**
@@ -66,6 +84,17 @@ public class EPNListener implements grammarEPNListener{
      * <p>The default implementation does nothing.</p>
      */
     @Override public void enterCondition(grammarEPNParser.ConditionContext ctx) {
+        String property = "";
+
+        property+="<property id="+propertyId +" name=\"";
+
+        property += ctx.getChild(1)!=null ? ctx.getChild(1).getText() : "condition";
+
+
+        property+="\">";
+
+
+        stack.push(property);
 
     }
     /**
@@ -74,7 +103,7 @@ public class EPNListener implements grammarEPNListener{
      * <p>The default implementation does nothing.</p>
      */
     @Override public void exitCondition(grammarEPNParser.ConditionContext ctx) {
-
+        propertyId++;
     }
     /**
      * {@inheritDoc}
@@ -82,7 +111,8 @@ public class EPNListener implements grammarEPNListener{
      * <p>The default implementation does nothing.</p>
      */
     @Override public void enterAny(grammarEPNParser.AnyContext ctx) {
-        stack.push("<property> ");
+
+
     }
     /**
      * {@inheritDoc}
