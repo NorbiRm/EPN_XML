@@ -87,30 +87,6 @@ public class grammarEPNBaseListener implements grammarEPNListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterDifferent(grammarEPNParser.DifferentContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitDifferent(grammarEPNParser.DifferentContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterSame(grammarEPNParser.SameContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitSame(grammarEPNParser.SameContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterWithin(grammarEPNParser.WithinContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -130,6 +106,18 @@ public class grammarEPNBaseListener implements grammarEPNListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitOperador(grammarEPNParser.OperadorContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterValue(grammarEPNParser.ValueContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitValue(grammarEPNParser.ValueContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

@@ -23,22 +23,21 @@ any:
     ;
 
 having:
-    | different
-    | same
-    ;
-different:
     | 'different' LETRA+
-    ;
-same:
     | 'same' LETRA+
     ;
 
 within:
-    | time operador
-    | time
+    | time operador value condition
+    | time value condition
+    | time condition
+
     ;
 operador:
     | 'greater than'
+    ;
+value:
+    | DIGIT LETRA+
     ;
 time:
     | DIGIT tipo

@@ -67,26 +67,6 @@ public interface grammarEPNListener extends ParseTreeListener {
 	 */
 	void exitHaving(grammarEPNParser.HavingContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link grammarEPNParser#different}.
-	 * @param ctx the parse tree
-	 */
-	void enterDifferent(grammarEPNParser.DifferentContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link grammarEPNParser#different}.
-	 * @param ctx the parse tree
-	 */
-	void exitDifferent(grammarEPNParser.DifferentContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link grammarEPNParser#same}.
-	 * @param ctx the parse tree
-	 */
-	void enterSame(grammarEPNParser.SameContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link grammarEPNParser#same}.
-	 * @param ctx the parse tree
-	 */
-	void exitSame(grammarEPNParser.SameContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link grammarEPNParser#within}.
 	 * @param ctx the parse tree
 	 */
@@ -106,6 +86,16 @@ public interface grammarEPNListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitOperador(grammarEPNParser.OperadorContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link grammarEPNParser#value}.
+	 * @param ctx the parse tree
+	 */
+	void enterValue(grammarEPNParser.ValueContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link grammarEPNParser#value}.
+	 * @param ctx the parse tree
+	 */
+	void exitValue(grammarEPNParser.ValueContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link grammarEPNParser#time}.
 	 * @param ctx the parse tree
