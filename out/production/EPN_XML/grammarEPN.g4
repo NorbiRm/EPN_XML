@@ -3,19 +3,18 @@ expr:
     | statement
     ;
 statement:
-    | if_statement 'and' if_statement
+    | if_statement ('and' if_statement)*
     | if_statement
     ;
 if_statement:
     | 'if' condition
-    | 'if' condition ( 'and' | 'or') condition
-    | 'if' condition ( 'and' | 'or') if_statement
+    | 'if' condition (( 'and' | 'or') condition)*
+    | 'if' condition (( 'and' | 'or') if_statement)*
     ;
 condition:
     | ('any of' | 'any') any
     | 'having' having
-    | 'within' within
-    | 'and' condition
+    | 'within' within (LETRA)+ condition
     ;
 any:
     | (LETRA)+
@@ -36,8 +35,9 @@ operador:
     | 'for' | 'than' | 'as' | 'earlier than' |
     ;
 value:
-    | DIGIT LETRA+
+    | DIGIT+
     | LETRA+
+
     ;
 time:
     | DIGIT tipo

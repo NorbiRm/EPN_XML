@@ -1,3 +1,4 @@
+import com.sun.prism.shader.Solid_TextureYV12_AlphaTest_Loader;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
@@ -42,7 +43,7 @@ public class EPNListener implements grammarEPNListener{
         test += "<test ";
 
         test +=" group=\"";
-        test += ctx.getChild(1).getChild(1)!=null ? ctx.getChild(1).getChild(1).getText() : "name";
+        test += ctx.getChild(1).getChild(1)!=null ? ctx.getChild(1).getChild(1).getText().substring(0,8) : "name";
 
         test +="\"  id="+ ifId +" operator=\"";
         test += ctx.getChild(2)!=null ? ctx.getChild(2).getText() : "AND";
@@ -62,40 +63,41 @@ public class EPNListener implements grammarEPNListener{
     @Override public void enterCondition(grammarEPNParser.ConditionContext ctx) {
         property = "";
 
-        //property+="<property id="+propertyId +" name=\"";
         property+="<property id="+propertyId;
         propertyId++;
-
-        //property += ctx.getChild(1)!=null ?    ctx.getChild(1).getText() : "condition";
-
-        //property += ctx.getChild(1)!=null ? ctx.getChild(0).getText().equals("within") ? "time" : ctx.getChild(1).getText() : "condition";
-
-
-
-
-
 
     }
     
     @Override public void exitCondition(grammarEPNParser.ConditionContext ctx) {
 
-        property+="/>";
-
         stack.push(property);
+        property = "";
     }
     
     @Override public void enterAny(grammarEPNParser.AnyContext ctx) {
         property+=" name=\"";
-        property += ctx.getChild(0) + "\"";
+        property += ctx.getText().substring(0,8) + "\"";
+
+        property+=" qualifier=\"";
+        property += "ANY\"";
+
+        property+=" name=\"";
+        property += ctx.getText().substring(8) + "\"/>";
     }
     
     @Override public void exitAny(grammarEPNParser.AnyContext ctx) {
-
     }
     
-    @Override public void enterHaving(grammarEPNParser.HavingContext ctx) { }
+    @Override public void enterHaving(grammarEPNParser.HavingContext ctx) {
 
-    @Override public void exitHaving(grammarEPNParser.HavingContext ctx) { }
+
+        property+=" value="+ctx.getChild(0);
+
+
+    }
+
+    @Override public void exitHaving(grammarEPNParser.HavingContext ctx) {
+    }
 
     @Override public void enterCampo(grammarEPNParser.CampoContext ctx){}
 
@@ -106,15 +108,30 @@ public class EPNListener implements grammarEPNListener{
 
     }
 
-    @Override public void exitWithin(grammarEPNParser.WithinContext ctx) { }
+    @Override public void exitWithin(grammarEPNParser.WithinContext ctx) {
+        stack.push(property);
+        //New property
+        property = "";
+    }
 
-    @Override public void enterOperador(grammarEPNParser.OperadorContext ctx) { }
+    @Override public void enterOperador(grammarEPNParser.OperadorContext ctx) {
 
-    @Override public void exitOperador(grammarEPNParser.OperadorContext ctx) { }
+        stack.push(property);
+        //New property
+        property = "";
+
+        property+="<property id="+propertyId;
+        propertyId++;
+
+        property+=" operator=\""+ctx.getChild(0)+"\"";
+    }
+
+    @Override public void exitOperador(grammarEPNParser.OperadorContext ctx) {
+    }
 
     @Override
     public void enterValue(grammarEPNParser.ValueContext ctx) {
-
+        property+=" value=\""+ctx.getChild(0)+"\"/>";
     }
 
     @Override
@@ -132,7 +149,7 @@ public class EPNListener implements grammarEPNListener{
 
     @Override public void enterTipo(grammarEPNParser.TipoContext ctx) {
         property+=" unit=\"";
-        property += ctx.getChild(0) + "\"";
+        property += ctx.getChild(0) + "\"/>";
     }
 
     @Override public void exitTipo(grammarEPNParser.TipoContext ctx) { }
