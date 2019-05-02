@@ -2,22 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f1d1e84c-eeb3-443d-9a90-49f40f92670f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/EPN_XML/grammarEPN.g4" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/EPN_XML/grammarEPN.g4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/EPN_XML/grammarEPN.interp" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/EPN_XML/grammarEPN.interp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/EPN_XML/grammarEPNParser$AnyContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/EPN_XML/grammarEPNParser$AnyContext.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/EPN_XML/grammarEPNParser$ConditionContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/EPN_XML/grammarEPNParser$ConditionContext.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/EPN_XML/grammarEPNParser$HavingContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/EPN_XML/grammarEPNParser$HavingContext.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/EPN_XML/grammarEPNParser$If_statementContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/EPN_XML/grammarEPNParser$If_statementContext.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/EPN_XML/grammarEPNParser$OperadorContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/EPN_XML/grammarEPNParser$OperadorContext.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/EPN_XML/grammarEPNParser$TimeContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/EPN_XML/grammarEPNParser$TimeContext.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/EPN_XML/grammarEPNParser$TipoContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/EPN_XML/grammarEPNParser$TipoContext.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/EPN_XML/grammarEPNParser$WithinContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/EPN_XML/grammarEPNParser$WithinContext.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/EPN_XML/grammarEPNParser.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/EPN_XML/grammarEPNParser.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/EPNListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EPNListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/grammarEPN.g4" beforeDir="false" afterPath="$PROJECT_DIR$/src/grammarEPN.g4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/grammarEPN.interp" beforeDir="false" afterPath="$PROJECT_DIR$/src/grammarEPN.interp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/grammarEPNParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/grammarEPNParser.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -31,7 +16,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/grammarEPN.g4">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="167">
+            <state relative-caret-position="272">
               <caret line="16" column="30" selection-start-line="16" selection-start-column="30" selection-end-line="16" selection-end-column="30" />
             </state>
           </provider>
@@ -40,11 +25,13 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/EPNListener.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="194">
-              <caret line="47" column="47" lean-forward="true" selection-start-line="47" selection-start-column="47" selection-end-line="47" selection-end-column="47" />
+            <state relative-caret-position="262">
+              <caret line="49" column="30" selection-start-line="49" selection-start-column="30" selection-end-line="49" selection-end-column="30" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#3479#3480#0" expanded="true" />
+                <element signature="e#1337#1338#0" expanded="true" />
+                <element signature="e#1364#1365#0" expanded="true" />
+                <element signature="e#3885#3886#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -53,7 +40,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
+            <state relative-caret-position="170">
               <caret line="11" column="52" selection-start-line="11" selection-start-column="52" selection-end-line="11" selection-end-column="52" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -198,8 +185,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="793" y="0" width="814" height="907" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2917772" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.29973474" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -262,9 +250,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/grammarEPN.g4">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="30" selection-start-line="16" selection-start-column="30" selection-end-line="16" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
+        <state relative-caret-position="170">
           <caret line="11" column="52" selection-start-line="11" selection-start-column="52" selection-end-line="11" selection-end-column="52" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -272,20 +267,15 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/grammarEPN.g4">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="167">
-          <caret line="16" column="30" selection-start-line="16" selection-start-column="30" selection-end-line="16" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/EPNListener.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="194">
-          <caret line="47" column="47" lean-forward="true" selection-start-line="47" selection-start-column="47" selection-end-line="47" selection-end-column="47" />
+        <state relative-caret-position="262">
+          <caret line="49" column="30" selection-start-line="49" selection-start-column="30" selection-end-line="49" selection-end-column="30" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#3479#3480#0" expanded="true" />
+            <element signature="e#1337#1338#0" expanded="true" />
+            <element signature="e#1364#1365#0" expanded="true" />
+            <element signature="e#3885#3886#0" expanded="true" />
           </folding>
         </state>
       </provider>
