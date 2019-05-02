@@ -13,6 +13,7 @@ public class EPNListener implements grammarEPNListener{
     Map<Integer,String> variables =  new HashMap<>();
     Stack<String> stack = new Stack<>();
 
+    int ruleId = 1;
     int propertyId = 1;
     int ifId = 1;
 
@@ -24,16 +25,28 @@ public class EPNListener implements grammarEPNListener{
     @Override public void exitExpr(grammarEPNParser.ExprContext ctx) {
         for (String x:stack
         ) {
-            System.out.println(x);
+            if(!x.equals("")) {
+                System.out.println(x);
+            }
         }
 
     }
 
     @Override public void enterStatement(grammarEPNParser.StatementContext ctx) {
         ifId=1;
+
+        String rule="";
+        rule+="<rule id="+ruleId+" group:\"";
+        rule+= ctx.getChild(0).getChild(1).getChild(1)!=null ? ctx.getChild(0).getChild(1).getChild(1).getText() : "rule";
+        rule += "\"/>";
+
+        ruleId++;
+        stack.push(rule);
     }
 
-    @Override public void exitStatement(grammarEPNParser.StatementContext ctx) { }
+    @Override public void exitStatement(grammarEPNParser.StatementContext ctx) {
+        stack.push("</rule>");
+    }
 
     @Override public void enterIf_statement(grammarEPNParser.If_statementContext ctx) {
         propertyId = 1;
@@ -43,7 +56,7 @@ public class EPNListener implements grammarEPNListener{
         test += "<test ";
 
         test +=" group=\"";
-        test += ctx.getChild(1).getChild(1)!=null ? ctx.getChild(1).getChild(1).getText().substring(0,8) : "name";
+        test += ctx.getChild(1).getChild(1)!=null ? ctx.getChild(1).getChild(1).getText() : "name";
 
         test +="\"  id="+ ifId +" operator=\"";
         test += ctx.getChild(2)!=null ? ctx.getChild(2).getText() : "AND";
@@ -76,13 +89,13 @@ public class EPNListener implements grammarEPNListener{
     
     @Override public void enterAny(grammarEPNParser.AnyContext ctx) {
         property+=" name=\"";
-        property += ctx.getText().substring(0,8) + "\"";
+        property += ctx.getText() + "\"";
 
         property+=" qualifier=\"";
         property += "ANY\"";
 
         property+=" name=\"";
-        property += ctx.getText().substring(8) + "\"/>";
+        property += ctx.getText() + "\"/>";
     }
     
     @Override public void exitAny(grammarEPNParser.AnyContext ctx) {
