@@ -36,9 +36,9 @@ public class EPNListener implements grammarEPNListener{
         ifId=1;
 
         String rule="";
-        rule+="<rule id="+ruleId+" group:\"";
+        rule+="<rule id="+ruleId+" group=\"";
         rule+= ctx.getChild(0).getChild(1).getChild(1)!=null ? ctx.getChild(0).getChild(1).getChild(1).getText() : "rule";
-        rule += "\"/>";
+        rule += "\">";
 
         ruleId++;
         stack.push(rule);
