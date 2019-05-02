@@ -1,66 +1,43 @@
-<rule group=”Failed login attempts from the same source” id=”1” name=”Authentication Rule 1”>
-    <test group=”subcheckset” id=”1” operator=”AND”>
+<rule group="Failed login attempts from the same source" id="1" name="Authentication Rule 1">
+    <test group="subcheckset" id="1" operator="AND">
         <properties>
-            <property id=”1” name=”subchecks” qualifier=”ANY” value=”subcheck-ValidationFailed” />
+            <property id="1" name="subchecks" qualifier="ANY" value="subcheck-ValidationFailed" />
         </properties>
     </test>
-    <test group=”userid and IP address” id=”2” operator=”AND”>
+    <test group="user.id and IP address" id="2" operator="AND">
         <properties>
-            <property id=”3” name=”username” value=”DIFFERENT” />
-            <property count=”&gt;5” id=”1” name=”srcip” value=”SAME” />
-            <property id=”2” name=”time” unit=”minutes” value=”2” />
+            <property id="3" name="username" value="DIFFERENT" />
+            <property count="&gt;5" id="1" name="srcip" value="SAME" />
+            <property id="2" name="time" unit="minutes" value="2" />
         </properties>
     </test>
 </rule>
 
-if any of subcheck-ValidationFailed Authentication SSH login Failed and
-if within 2 minutes greater than5 events occur having different username
-and having same source ip
-XML for Failed Login Attempts from theSame Source:
+if any of subcheck-ValidationFailed Authentication SSH login Failed and if
+within 2 minutes greater than 5 events occure having different username and
+having same source ip
 
+-----------------------------OUTPUT-----------------------------------------
+
+XML Generated:
 <rule id=1 group="subcheck-ValidationFailedAuthenticationSSHloginFailed">
-<test  group="subcheck-ValidationFailedAuthenticationSSHloginFailed"  id=1 operator="AND" >
-<properties>
-<property id=1 name="subcheck-ValidationFailedAuthenticationSSHloginFailed" qualifier="ANY" name="subcheck-ValidationFailedAuthenticationSSHloginFailed"/>
-</properties> 
-</test>
-<test  group="2minutesgreater than5"  id=2 operator="and" >
-<properties>
-<property id=1 name="time" value="2" unit="minutes"/>
-<property id=2 operator="greater than" value="5"/>
-<property id=3 value=different value="username"/>
-<property id=4 value=same value="source"/>
-</properties> 
-</test>
+    <test group="subcheck-ValidationFailedAuthenticationSSHloginFailed" id=1 operator="AND">
+        <properties>
+            <property id=1 name="subcheck-ValidationFailedAuthenticationSSHloginFailed" qualifier="ANY"
+                name="subcheck-ValidationFailedAuthenticationSSHloginFailed" />
+        </properties>
+    </test>
+    <test group="2minutesgreater than5" id=2 operator="and">
+        <properties>
+            <property id=1 name="time" value="2" unit="minutes" />
+            <property id=2 operator="greater than" value="5" />
+            <property id=3 value=different value="username" />
+            <property id=4 value=same value="source" />
+        </properties>
+    </test>
 </rule>
-
-
-@Name’1 Failed login attempts from the same source::Authentication Rule 1’
-select *from eParsereventStream.win:timebatch(2 min)
-where (executesubcheck’Validationfailed’)
-group by scrip having count(∗)>=5 and count(distinct username)>=5;
-
-OUTPUT:
-
-XML Generated: 
-<rule id=1 group="subcheck-ValidationFailedAuthenticationSSHloginFailed">
-<test  group="subcheck-ValidationFailedAuthenticationSSHloginFailed"  id=1 operator="AND" >
-<properties>
-<property id=1 name="subcheck-ValidationFailedAuthenticationSSHloginFailed" qualifier="ANY" name="subcheck-ValidationFailedAuthenticationSSHloginFailed"/>
-</properties> 
-</test>
-<test  group="2minutesgreater than5"  id=2 operator="and" >
-<properties>
-<property id=1 name="time" value="2" unit="minutes"/>
-<property id=2 operator="greater than" value="5"/>
-<property id=3 value=different value="username"/>
-<property id=4 value=same value="source"/>
-</properties> 
-</test>
-</rule>
-EPL Generated: 
+EPL Generated:
 @Name'1 subcheck-ValidationFailedAuthenticationSSHloginFailed Rule1'
 select *from eParsereventStream.win:timebatch(2 minutes)
 where (subcheck-ValidationFailedAuthenticationSSHloginFailed)
 group by source having count(*)>=5 and count(different username)>=5 and count(same source)>=5
-(expr (statement (if_statement if (condition any of (any subcheck-ValidationFailed Authentication SSH login Failed))) and (if_statement if (condition within (within (time 2 (tipo minutes)) (operador greater than) (value 5)) (any events occur) (condition having (having different (value username)))) and (condition having (having same (value source ip))))))
