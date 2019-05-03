@@ -31,8 +31,13 @@ within:
     | time
     ;
 operador:
-    | 'greater than' | 'greater' | 'less than'
-    | 'for' | 'than' | 'as' | 'earlier than' |
+    | 'greater than'
+    | 'greater'
+    | 'less than'
+    | 'for'
+    | 'than'
+    | 'as'
+    | 'earlier than'
     ;
 value:
     | DIGIT+
@@ -40,7 +45,7 @@ value:
 
     ;
 time:
-    | DIGIT tipo
+    | (DIGIT)+ tipo
     ;
 tipo:
     |('minutes' | 'hours')

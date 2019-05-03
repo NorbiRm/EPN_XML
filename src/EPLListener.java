@@ -21,11 +21,13 @@ public class EPLListener implements grammarEPNListener{
     String property = "";
 
     String from = "";
-    String where = "";
+    ArrayList<String> where =  new ArrayList<String>();;
     String groupOperator = "";
     String groupOperatorValue = "";
     ArrayList<String> groupNames = new ArrayList<String>();
     ArrayList<String> groupCondition = new ArrayList<String>();
+
+    String fromType="";
 
 
 
@@ -68,7 +70,7 @@ public class EPLListener implements grammarEPNListener{
 
         stackEPL.push(line);
 
-        where += ctx.getChild(0).getChild(1).getChild(1)!=null ? ctx.getChild(0).getChild(1).getChild(1).getText() : "name";
+
 
 
 
@@ -80,38 +82,45 @@ public class EPLListener implements grammarEPNListener{
         stack.push("</rule>");
 
         //EPL Segment
+        if(!from.isEmpty()) {
+            String selectLine = "select * from eParsereventStream.win:timebatch(" + from + ")";
+            stackEPL.push(selectLine);
 
-        String selectLine= "select *from eParsereventStream.win:timebatch("+from+")";
-        stackEPL.push(selectLine);
-
-        String whereLine= "where (" + where + ")";
-        stackEPL.push(whereLine);
-
-        String groupLine = "group by " + groupNames.get(groupNames.size()-1);
-
-        String oper = "=";
-
-
-        if (groupOperator.equals("greater than")){
-            oper = ">=" + groupOperatorValue;
-            groupLine += " having count(*)" +oper ;
-        }else if (groupOperator.equals("less than")){
-            oper = "<=" + groupOperatorValue;
-            groupLine += " having count(*)" +oper ;
+            String whereLine= "where (" + where.get(0) + ")";
+            stackEPL.push(whereLine);
         }
 
-
-        for (String x: groupCondition
-        ) {
-            if (x.equals("same")) {
-                groupLine += " and count(same " + groupNames.get(groupCondition.indexOf(x)) + ")" + oper;
-            } else if (x.equals("different")) {
-                groupLine += " and count(different " + groupNames.get(groupCondition.indexOf(x)) + ")" + oper;
+        else{
+            String selectLine = "select * from ";
+            for(String x: where){
+                selectLine += x + " ";
             }
+
+            stackEPL.push(selectLine);
         }
 
 
-        stackEPL.push(groupLine);
+        if (!groupNames.isEmpty()) {
+            String groupLine = "group by " + groupNames.get(groupNames.size() - 1);
+            String oper = "=";
+            if (groupOperator.equals("greater than")) {
+                oper = ">=" + groupOperatorValue;
+                groupLine += " having count(*)" + oper;
+            } else if (groupOperator.equals("less than")) {
+                oper = "<=" + groupOperatorValue;
+                groupLine += " having count(*)" + oper;
+            }
+            for (String x : groupCondition
+            ) {
+                if (x.equals("same")) {
+                    groupLine += " and count(same " + groupNames.get(groupCondition.indexOf(x)) + ")" + oper;
+                } else if (x.equals("different")) {
+                    groupLine += " and count(different " + groupNames.get(groupCondition.indexOf(x)) + ")" + oper;
+                }
+            }
+            stackEPL.push(groupLine);
+        }
+
     }
 
     @Override public void enterIf_statement(grammarEPNParser.If_statementContext ctx) {
@@ -162,6 +171,11 @@ public class EPLListener implements grammarEPNListener{
 
         property+=" name=\"";
         property += ctx.getText() + "\"/>";
+
+        //EPL Segment
+
+        String w = ctx.getText();
+        where.add(w);
     }
     
     @Override public void exitAny(grammarEPNParser.AnyContext ctx) {
@@ -242,6 +256,7 @@ public class EPLListener implements grammarEPNListener{
         property += ctx.getChild(0) + "\"";
 
         //EPL Segment
+        fromType="time";
         from += ctx.getChild(0);
     }
 
