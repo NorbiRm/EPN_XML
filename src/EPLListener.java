@@ -86,7 +86,7 @@ public class EPLListener implements grammarEPNListener{
             String selectLine = "select * from eParsereventStream.win:timebatch(" + from + ")";
             stackEPL.push(selectLine);
 
-            String whereLine= "where (" + where.get(0) + ")";
+            String whereLine= "where (" + where.get(where.size()-1) + ")";
             stackEPL.push(whereLine);
         }
 
@@ -175,7 +175,9 @@ public class EPLListener implements grammarEPNListener{
         //EPL Segment
 
         String w = ctx.getText();
-        where.add(w);
+        if (!w.equals("eventsoccure")){
+            where.add(w);
+        }
     }
     
     @Override public void exitAny(grammarEPNParser.AnyContext ctx) {

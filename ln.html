@@ -12,7 +12,7 @@
         </properties>
     </test>
 </rule>
-
+Query#1:
 if any of subcheck-ValidationFailed Authentication SSH login Failed and if
 within 2 minutes greater than 5 events occure having different username and
 having same source ip
@@ -41,3 +41,11 @@ EPL Generated:
 select *from eParsereventStream.win:timebatch(2 minutes)
 where (subcheck-ValidationFailedAuthenticationSSHloginFailed)
 group by source having count(*)>=5 and count(different username)>=5 and count(same source)>=5
+
+Query#2:
+if any of MyEvent and if within 3 minutes less than 1 events occure having same ip and
+having different macAddres and if any of users not valid
+
+Query#3:
+if within 3 minutes less than 1 events occure having same ip and
+having different macAddres and if any of users not valid if any of MyEvent
