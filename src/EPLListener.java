@@ -85,9 +85,10 @@ public class EPLListener implements grammarEPNListener{
         if(!from.isEmpty()) {
             String selectLine = "select * from eParsereventStream.win:timebatch(" + from + ")";
             stackEPL.push(selectLine);
-
-            String whereLine= "where (" + where.get(where.size()-1) + ")";
-            stackEPL.push(whereLine);
+            if(!where.isEmpty()){
+                String whereLine = "where (" + where.get(where.size() - 1) + ")";
+                stackEPL.push(whereLine);
+            }
         }
 
         else{

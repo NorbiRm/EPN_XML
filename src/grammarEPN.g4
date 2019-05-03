@@ -14,7 +14,7 @@ if_statement:
 condition:
     | ('any of' | 'any') any
     | 'having' having
-    | 'within' within (LETRA)+ condition
+    | 'within' within (LETRA)+
     ;
 any:
     | (LETRA)+
